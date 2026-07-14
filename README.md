@@ -27,3 +27,9 @@ To stop the threat actor from executing further commands, immediate host-based i
 The malicious IP was dropped at the firewall level using the following `iptables` command:
 ```bash
 sudo iptables -A INPUT -s 192.168.1.45 -j DROP
+```
+## 3. Defensive Hardening & Proactive Automation
+To prevent future incidents of this nature, the following security baselines were established on the server:
+
+* **Disable Root Login:** Modified the configuration file `/etc/ssh/sshd_config` by setting `PermitRootLogin no` and restarted the service using `sudo systemctl restart sshd`.
+* **Automated Defense:** Implemented `Fail2Ban` to automatically scan authentication logs and drop any IP address exceeding 3 failed login attempts within a 1-minute window.
